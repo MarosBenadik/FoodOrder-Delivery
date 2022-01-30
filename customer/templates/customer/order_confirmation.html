@@ -4,8 +4,8 @@
 <div class="container mb-5">
     <div class="row justify-content-center mt-1">
         <div class="col-md-5 col-sm-12 p-4 text-center">
-            <h1>Objednane!</h1>
-            <p>Email s vasou objednavkou bol odoslany.</p>
+            <h1>Ptvrdit Objednavky!</h1>
+            <p>Ak ste spokojny s objednavko zvolte moznost pladby</p>
             <a href="{% url 'index' %}">Na hlavnu stranku</a>
         </div>
     </div>
@@ -13,11 +13,29 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-5 col-sm-12 text-center">
             <h3 class="pb-3">Objenavka:</h3>
-            {% for item in items %}
-                <p>{{ item.name }} <span class="pl-3">{{ item.price }}</span></p>
+            {% for item in items.all %}
+                <p>{{ item.name }} <span class="pl-3">{{ item.price }}</span><span>{{ item.quantity }}</span></p>
             {% endfor %}
 
             <p class="font-weight-bold pt-4">Total: € {{ price }}</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h3>Moznost Zaplatit online alobe pri doruceny!</h3>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="card col-md-4 col-sm-12 md-1 p-4 text-center">
+            <a href="{% url 'non-payment-submitted' pk %}" class="btn btn-outline-primary"><i class="far fa-handshake"></i>Zaplatit pri doruceny!</a>
+            <h2>Moznosty platby!</h2>
+            <a href="{% url 'payment-submitted' pk %}" class="btn btn-outline-primary"><i class="fab fa-apple-pay"></i>ApplePay!</a>
+            <a href="{% url 'payment-submitted' pk %}" class="btn btn-outline-primary"><i class="fab fa-google-pay""></i>GooglePay!</a>
+            <a href="{% url 'payment-submitted' pk %}" class="btn btn-outline-primary"><i class="fab fa-cc-visa""></i>Visa!</a>
+            <a href="{% url 'payment-submitted' pk %}" class="btn btn-outline-primary"><i class="fab fa-cc-mastercard""></i>Master!</a>
+
+
         </div>
     </div>
 </div>

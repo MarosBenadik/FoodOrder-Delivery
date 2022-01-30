@@ -1,0 +1,36 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row justify-content-center mt-1">
+        <div class="col-md-5 col-sm-12 p-4 text-center">
+            <h1>Ptvrdit Objednavky!</h1>
+            <p>Ak ste spokojny s objednavko zvolte moznost pladby</p>
+            <a href="{% url 'index' %}">Na hlavnu stranku</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5 col-sm-12">
+            <h3 class="pb-3">Objenavka:</h3>
+            {% for item in items.all %}
+                <p>{{ item.image }} - {{ item.name }} <span class="pl-3">{{ item.price }}</span></p>
+            {% endfor %}
+
+            <p class="font-weight-bold pt-4">Total: € {{ price }}</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h3>Je to vsetko z vasej objednavky?</h3>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="card col-md-4 col-sm-12 md-1 p-4 text-center">
+            <h2>Potvrdit objednavku!</h2>
+            <button class="btn btn-dark mt-5"><i class="far fa-thumbs-up"> Objednat!!</i></button>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends 'restourant/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-5 col-sm-12 p-4">
+        <a href="{% url 'dashboard' %}" class="btn bt-light">Objednavky</a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-12 text-center mt-3">
+            <h1>Objednavka: {{ order.pk }}</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-12 com-sm-12 mt-5">
+            <h3>Informacie Zakaznika:</h3>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 com-sm-12 mt-5">
+            <p><span style="font-weight: 400;">Meno:</span> {{ order.name }}</p>
+            <p><span style="font-weight: 400;">Email:</span> {{ order.email }}</p>
+            <h5 class="pt-3">Adresa:</h5>
+            <p><span style="font-weight: 400;">Ulica:</span> {{ order.street }}</p>
+            <p><span style="font-weight: 400;">Mesto:</span> {{ order.city }}</p>
+            <p><span style="font-weight: 400;">Stat:</span> {{ order.state }}</p>
+            <p><span style="font-weight: 400;">PSC:</span> {{ order.zipcode }}</p>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <h5>Informacie o Platbe a Dorucuceny</h5>
+            <p class="mt-3">{% if order.is_paid %}
+                <p><i style="color: green;" class="fas fa-check"></i><span class="pl-2">Objednavka Bola Zaplatena!</span></p>
+                {% else %}
+                <form method="POST" id="is_paid">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-success">Oznacit ako Zaplatenu!</button>
+                </form>
+                {% endif %}</p>
+                {% if order.is_shippped %}
+                <p><i style="color: green;" class="fas fa-check"></i><span class="pl-2">Objednavka Bola Poslana!</span></p>
+                {% else %}
+                <form method="POST" id="is_shippped">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-success">Oznacit ako Poslanu!</button>
+                </form>
+                {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -6,6 +6,7 @@ class MenuItem(models.Model):
 	image = models.ImageField(upload_to='menu_images/')
 	price = models.DecimalField(max_digits=7, decimal_places=2)
 	category = models.ManyToManyField('Category', related_name='item')
+	created_on = models.DateTimeField(auto_now_add=True)
 
 
 	def __str__(self):

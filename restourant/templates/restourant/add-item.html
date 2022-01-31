@@ -1,0 +1,40 @@
+{% extends 'restourant/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row justify-content-center mt-1">
+        <div class="col-md-12 col-sm-12 p-4">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group pt-3">
+                    <label for="name">Nazov Produktu</label>
+                    <input required class="form-control" type="text" placeholder="Meno Produktu" name="name" />
+                </div>
+
+                <div class="form-group pt-3">
+                    <label for="name">Informacie</label>
+                    <input required class="form-control" type="text" placeholder="Informacie o Produkte" name="description" />
+                </div>
+
+                <div class="form-group pt-3">
+                    <label for="name">Obrazok</label>
+                    <input required class="form-control" type="image" name="image" />
+                </div>
+
+                <div class="form-group pt-3">
+                    <label for="name">Uved Cenu</label>
+                    <input required class="form-control" type="text" placeholder="Cena" name="price" />
+                </div>
+
+                <div class="form-group pt-3">
+                    <label for="name">Zvolte Categoriu</label>
+                    <input required class="form-control" type="text" placeholder="Kategoria" name="category" />
+                </div>
+
+                <button class="btn btn-pink mt-5">Pridat!!</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

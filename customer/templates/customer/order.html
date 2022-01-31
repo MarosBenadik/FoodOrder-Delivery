@@ -20,8 +20,16 @@
                                     <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity"/>                                    <label class="form-check-label">{{ app.name }}</label>
                                 </div>
                                 <p class="font-weight-bold pl-5">{{ app.price }}</p>
+                                <div class="col-md-5 col-sm-12 p-4">
+                                    <a href="{% url 'item-desctiption' app.pk %}" class="btn bt-light">Informacie</a>
+                                </div>
                             </div>
-                            <p>{{ app.description }}</p>
+
+                        </div>
+                        <div>
+                            <div class="col-md-5 col-sm-12">
+                                <a href="{% url 'item-desctiption' app.pk %}" class="btn btn-outline-pink">Information</a>
+                            </div>
                         </div>
                     </div>
                     <hr />

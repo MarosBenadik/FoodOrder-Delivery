@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.utils.timezone import datetime
-from customer.models import OrderModel
+from customer.models import OrderModel, MenuItem
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
@@ -43,11 +43,18 @@ class OrderDetails(UserPassesTestMixin, LoginRequiredMixin, View):
 		return render(request, 'restourant/order-details.html', context)
 
 	def post(self, request, pk, *args, **kwargs):
+
 		order = OrderModel.objects.get(pk=pk)
 
-		order.is_shippped = True
-		order.save()
+		if request.POST.get('is_paid'):
 
+			order.is_paid = True
+			order.save()
+
+		if request.POST.get('is_shipped'):
+
+			order.is_shippped = True
+			order.save()
 
 		context = {
 			'order': order
@@ -63,6 +70,8 @@ class OrderDetails(UserPassesTestMixin, LoginRequiredMixin, View):
 class AllOrders(UserPassesTestMixin, LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
 		orders = OrderModel.objects.all().order_by('-created_on')
+
+		items_count = {}
 
 		total_revenue = 0
 
@@ -81,3 +90,22 @@ class AllOrders(UserPassesTestMixin, LoginRequiredMixin, View):
 	def test_func(self):
 		return self.request.user.groups.filter(name='staff').exists()
 
+
+class AddProduct(UserPassesTestMixin, LoginRequiredMixin, View):
+	def get(self, request, *args, **kwargs):
+		return render(request, 'restourant/add-item.html')
+
+	def post(self, request, *args, **kwargs):
+
+		name = request.POST.get('name')
+		description = request.POST.get('description')
+		image = request.POST.get('image')
+		price = request.POST.get('price')
+		category = request.POST.get('category')
+
+		MenuItem.create(name=name, description=description, image=image, price=price, category=category)
+
+		return redirect('dashboard')
+
+	def test_func(self):
+		return self.request.user.groups.filter(name='staff').exists()

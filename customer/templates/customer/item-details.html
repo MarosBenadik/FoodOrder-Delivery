@@ -1,0 +1,41 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-5 col-sm-12">
+        <a href="{% url 'order' %}" class="btn btn-outline-pink">Naspat na ponuku</a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-12 text-center mt-3">
+            <h1 style="font-family:verdana;">{{ item.name }}</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-12 com-sm-12 mt-5">
+            <h3><i class="fas fa-bread-slice"> Informacie O produkte:</i></h3>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 com-sm-12 mt-5">
+            <p><span style="font-weight: 400;"></span> {{ item.description }}</p>
+
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <h5>Informacie o Platbe a Dorucuceny</h5>
+            <p class="mt-3">
+                <div class="col-md-2 col-sm-12">
+                    <img class="rounded" src="{{ item.image.url }}" width="400" height="300"/>
+                </div>
+                <div class="justify-content-center">
+                    <form method="POST" id="basket">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-pink">Pridat Do kosika</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

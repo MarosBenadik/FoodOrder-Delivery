@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Index, About, Order, OrderConfirmation, OrderPayConfirmation, NoPaymentConfirmation, Basket
+from .views import Index, About, Order, OrderConfirmation, ItemView, OrderPayConfirmation, NoPaymentConfirmation, Basket
 
 urlpatterns = [
 	path('', Index.as_view(), name='index'),
@@ -8,5 +8,6 @@ urlpatterns = [
 	path('order-confirmation/<int:pk>/', OrderConfirmation.as_view(), name='order-confirmation'),
 	path('payment-confirmation/<int:pk>/', OrderPayConfirmation.as_view(), name='payment-submitted'),
 	path('non-payment-submited/<int:pk>/', NoPaymentConfirmation.as_view(), name='non-payment-submitted'),
-	path('basket/<int:pk>/', Basket.as_view(), name='basket')
+	path('basket/<int:pk>/', Basket.as_view(), name='basket'),
+	path('items/<int:pk>/', ItemView.as_view(), name='item-desctiption')
 ]

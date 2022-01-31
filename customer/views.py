@@ -7,7 +7,7 @@ from .models import MenuItem, Category, OrderModel
 
 class Index(View):
 	def get(self, request, *args, **kwargs):
-		new_items = MenuItem.objects.all().order_by('-pk')[4:]
+		new_items = MenuItem.objects.all().order_by('-created_on')[:4]
 
 		most_ordered = OrderModel.objects.filter()
 
@@ -26,11 +26,11 @@ class About(View):
 
 class Order(View):
 	def get(self, request, *args, **kwargs):
-		appetizers = MenuItem.objects.filter(category__name__contains="predjedlo")
-		entres = MenuItem.objects.filter(category__name__contains="hlavnejedlo")
-		soups = MenuItem.objects.filter(category__name__contains="polievka")
-		desserts = MenuItem.objects.filter(category__name__contains="dezerty")
-		drinks = MenuItem.objects.filter(category__name__contains="napoje")
+		appetizers = MenuItem.objects.filter(category__name__contains="Hamky")
+		entres = MenuItem.objects.filter(category__name__contains="SlaneKolace")
+		soups = MenuItem.objects.filter(category__name__contains="SladkeKolace")
+		desserts = MenuItem.objects.filter(category__name__contains="SucheKolace")
+		drinks = MenuItem.objects.filter(category__name__contains="Drinky")
 
 
 		context = {
@@ -185,6 +185,17 @@ class Basket(View):
 		}
 
 		return render(request, 'customer/basket.html', context)
+
+
+class ItemView(View):
+	def get(self, request, pk, *args, **kwargs):
+		item = MenuItem.objects.get(pk=pk)
+
+		context = {
+			'item': item
+		}
+
+		return render(request, 'customer/item-details.html', context)
 
 
 

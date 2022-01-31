@@ -4,18 +4,24 @@
 <div class="container mb-5">
     <div class="row justify-content-center mt-5">
         <div class="col-md-8 col-sm-12 offset-md-1 p-4 text-center">
-            <h1>Online Kolace Delivery servis</h1>
+            <h1 style="font-family:Brush Script;">Online Kolace Delivery servis</h1>
         </div>
     </div>
+    <div class="row mt-5">
+        <div class="col-md-8 col-sm-12 p-4">
+            <h3>Novinky v nasej ponuke!</h3>
+        </div>
+    </div>
+
     <div class="row mt-2">
         <div class="row mt-5">
             {% for new_item in new_items %}
-            <div class="card" style="width: 18rem;">
-              <img src=".." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="card position-relative" style="width: 17rem; margin: 10px">
+                <img class="rounded" src="{{ new_item.image.url }}" width="274" height="225"/>
+                <div class="card-body">
+                <h5 class="card-title">{{ new_item.name }}</h5>
+                <p class="card-text">{{ new_item.description }}</p>
+                <a href="{% url 'item-desctiption' new_item.pk %}" class="btn btn-pink">Informacie</a>
               </div>
             </div>
             {% endfor %}
@@ -24,7 +30,7 @@
     <div class="container mb-5">
         <div class="row justify-content-center mt-5">
             {% for order in most_ordered %}
-                <img src="..." class="img-thumbnail" alt="...">
+                <img class="rounded" src="{{ app.image.url }}" width="150" height="100"/>
             {% endfor %}
         </div>
     </div>

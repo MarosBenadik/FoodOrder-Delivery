@@ -17,18 +17,17 @@
                             <div class="d-flex flex-row">
                                 <div class="form-group form-check">
                                     <input type="checkbox" name="items[]" class="form-check-input" value="{{ app.pk }}">
-                                    <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity"/>                                    <label class="form-check-label">{{ app.name }}</label>
                                 </div>
                                 <p class="font-weight-bold pl-5">{{ app.price }}</p>
+                                <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity"/>
                                 <div class="col-md-5 col-sm-12 p-4">
                                     <a href="{% url 'item-desctiption' app.pk %}" class="btn bt-light">Informacie</a>
                                 </div>
                             </div>
-
                         </div>
                         <div>
+                            <label class="form-check-label">{{ app.name }}</label>
                             <div class="col-md-5 col-sm-12">
-                                <a href="{% url 'item-desctiption' app.pk %}" class="btn btn-outline-pink">Information</a>
                             </div>
                         </div>
                     </div>
@@ -45,15 +44,19 @@
                         </div>
                         <div class="col-md-8 col-sm-12">
                             <div class="d-flex flex-row">
-                                <div class="form-group form-check">
+                                <div class="form-group form-check col-md-8 col-sm-12 p-4">
                                     <input type="checkbox" name="items[]" class="form-check-input" value="{{ entre.pk }}">
                                     <label class="form-check-label">{{ entre.name }}</label>
-                                    <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity" />                                    <label class="form-check-label">{{ app.name }}</label>
-
+                                </div>
+                                <div class="col-md-3 col-sm-12 p-2">
+                                    <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity" />
                                 </div>
                                 <p class="font-weight-bold pl-5">{{ entre.price }}</p>
+                                <div class="col-md-5 col-sm-12 p-4">
+                                    <a href="{% url 'item-desctiption' entre.pk %}" class="btn bt-light">Detail!</a>
+                                </div>
                             </div>
-                            <p>{{ entre.description }}</p>
+                            <label class="form-check-label">{{ app.name }}</label>
                         </div>
                     </div>
                     <hr />
@@ -74,10 +77,10 @@
                                     <label class="form-check-label">{{ dessert.name }}</label>
                                 </div>
                                 <p class="font-weight-bold pl-5">{{ dessert.price }}</p>
-                                <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity" />                                    <label class="form-check-label">{{ app.name }}</label>
-
                             </div>
                             <p>{{ dessert.description }}</p>
+                            <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity" />
+                            <label class="form-check-label">{{ app.name }}</label>
                         </div>
                     </div>
                     <hr />
@@ -123,9 +126,9 @@
                                     <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity" />
                                     <label class="form-check-label">{{ app.name }}</label>
                                 </div>
-                                <p class="font-weight-bold pl-5">{{ drink.price }}</p>
                             </div>
                             <p>{{ drink.description }}</p>
+                            <p class="font-weight-bold pl-5">{{ drink.price }}</p>
                         </div>
                     </div>
                     <hr />

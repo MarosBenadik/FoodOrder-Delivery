@@ -1,0 +1,54 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row justify-content-center mt-1">
+        <div class="col-md-12 col-sm-12 p-4">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group pt-3">
+                        <label for="name">Cele Meno</label>
+                        <input required class="form-control" type="text" placeholder="Vase meno" name="name" />
+                    </div>
+
+                    <div class="form-group pt-3">
+                        <label for="number">Telefone Cislo</label>
+                        <input required class="form-control" type="text" placeholder="0983 673 834" name="number" />
+                    </div>
+
+                    <div class="form-group pt-3">
+                        <label for="email">Emailova adresa</label>
+                        <input required class="form-control" type="text" placeholder="nazornypriklad@priklad.com" name="email" />
+                    </div>
+
+                    <div class="form-group pt-3">
+                        <label for="street">Adresa</label>
+                        <input required class="form-control" type="text" placeholder="Tkacska 1/9" name="street" />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group pt-3">
+                                <label for="city">Mesto</label>
+                                <input required class="form-control" type="text" placeholder="Spisska Nova Ves" name="city" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group pt-3">
+                                <label for="state">Stat</label>
+                                <input class="form-control" type="text" placeholder="Slovensko" name="state" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group pt-3">
+                                <label for="zipcode">PSC</label>
+                                <input required class="form-control" type="text" placeholder="05201" name="zipcode" />
+                            </div>
+                        </div>
+                    </div>
+                <button class="btn btn-dark mt-5">Objednat!!</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

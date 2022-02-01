@@ -5,6 +5,7 @@
     <div class="col-md-5 col-sm-12 p-4">
         <a href="{% url 'dashboard' %}" class="btn bt-light">Objednavky</a>
     </div>
+
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-12 text-center mt-3">
             <h1>Objednavka: {{ order.pk }}</h1>
@@ -13,21 +14,18 @@
 
     <div class="row justify-content-center">
         <div class="col-md-12 com-sm-12 mt-5">
-            <h3>Informacie Zakaznika:</h3>
+            <h3>Objednane Produkty:</h3>
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-md-6 com-sm-12 mt-5">
-            <p><span style="font-weight: 400;">Meno:</span> {{ order.name }}</p>
-            <p><span style="font-weight: 400;">Email:</span> {{ order.email }}</p>
-            <h5 class="pt-3">Adresa:</h5>
-            <p><span style="font-weight: 400;">Ulica:</span> {{ order.street }}</p>
-            <p><span style="font-weight: 400;">Mesto:</span> {{ order.city }}</p>
-            <p><span style="font-weight: 400;">Stat:</span> {{ order.state }}</p>
-            <p><span style="font-weight: 400;">PSC:</span> {{ order.zipcode }}</p>
+    {% for item in items.all %}
+    <div class="row">
+        <div class="col-md-2 com-sm-12 mt-3">
+            <p><span style="font-weight: 400;">{{ item.name }}</span> {{ item.price }}</p>
         </div>
-
+    </div>
+    {% endfor %}
+    <div class="d-flex flex-row-reverse bd-highlight">
         <div class="col-md-6 col-sm-12">
             <h5>Informacie o Platbe a Dorucuceny</h5>
             <p class="mt-3">

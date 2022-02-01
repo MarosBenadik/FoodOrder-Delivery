@@ -3,34 +3,50 @@
 {% block content %}
 <div class="container mb-5">
     <div class="row justify-content-center mt-1">
-        <div class="col-md-5 col-sm-12 p-4 text-center">
-            <h1>Ptvrdit Objednavky!</h1>
-            <p>Ak ste spokojny s objednavko zvolte moznost pladby</p>
-            <a href="{% url 'index' %}">Na hlavnu stranku</a>
+        <div class="col-md-3 col-sm-12 p-4 text-center">updateorder
+            <h1>Vas Kosik</h1>
+            <a class="btn btn-green" href="{% url 'order-confirmation' pk %}">Potvrdit Objednavku</a><span>
+            <a class="btn btn-yellow mt-1" href="{% url 'updateorder' pk %}">Upravit Objednavku</a></span>
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-5 col-sm-12">
-            <h3 class="pb-3">Objenavka:</h3>
+    <div class="row justify-content-center mt-3">
+         <div class="col-md-5 col-sm-12">
+            <h3 class="pb-2">Objenavka:</h3>
             {% for item in items.all %}
-                <p>{{ item.image }} - {{ item.name }} <span class="pl-3">{{ item.price }}</span></p>
-            {% endfor %}
+             <div class="row">
+                <div class="col-md-5 col-sm-8">
+                    <img class="rounded" src="{{ item.image.url }}" width="150" height="100"/>
+                </div>
 
+                <div class="col-md-5 col-sm-12">
+                    <h5>{{ item.name }} </h5>
+                </div>
+                 <div class="col-md-5 col-sm-12">
+                     <h5 class="pl-3">{{ item.price }}</h5>
+                 </div>
+                 <div class="col-md-5 col-sm-12">
+                     <form method="POST" id="delete">
+                        {% csrf_token %}
+                        <button type="submit" name='delete' value={{item.pk}} class="btn btn-outline-danger">Vymazat!</button>
+                    </form>
+                 </div>
+             </div>
+             <br>
+            {% endfor %}
             <p class="font-weight-bold pt-4">Total: € {{ price }}</p>
-        </div>
+         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6 text-center">
-            <h3>Je to vsetko z vasej objednavky?</h3>
-        </div>
-    </div>
+
+
+
 
     <div class="row justify-content-center">
         <div class="card col-md-4 col-sm-12 md-1 p-4 text-center">
             <h2>Potvrdit objednavku!</h2>
-            <button class="btn btn-dark mt-5"><i class="far fa-thumbs-up"> Objednat!!</i></button>
+            <button class="btn btn-pink mt-5"><i class="far fa-thumbs-up"> Objednat!!</i></button>
         </div>
     </div>
+
 </div>
 {% endblock content %}

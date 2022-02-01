@@ -4,10 +4,17 @@
 <div class="container mb-5">
     <div class="row justify-content-center mt-1">
         <div class="col-md-5 col-sm-12 p-4 text-center">
-            <h1>Ptvrdit Objednavku!</h1>
+            <h1>Potvrdit Objednavku!</h1>
             <p>Ak ste spokojny s objednavko zvolte moznost pladby</p>
             <a href="{% url 'index' %}">Na hlavnu stranku</a>
         </div>
+    </div>
+    <div class="d-flex flex-row-reverse bd-highlight">
+        <ul class="basket">
+          <li class="basket">
+            <a class="basket-link" href="{% url 'basket' pk %}"><i class="fas fa-shopping-cart"> Upravit Objednavku!</i></a>
+          </li>
+        </ul>
     </div>
 
     <div class="row justify-content-center mt-5">

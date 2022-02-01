@@ -1,177 +1,67 @@
 {% extends 'customer/base.html' %}
 
 {% block content %}
-<div class="container mb-5">
-    <div class="row justify-content-center mt-1">
-        <div class="col-md-12 col-sm-12 p-4">
-            <form method="POST">
-                {% csrf_token %}
-                <div class="pt-5">
-                    <h5>Categoria 1!</h5>
-                    {% for app in appetizers %}
-                    <div class="row">
-                        <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ app.image.url }}" width="150" height="100"/>
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="d-flex flex-row">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ app.pk }}">
+<div class="container mb-1">
+    <div class="dropdown">
+      <button class="btn btn-pink dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Kategorie
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <div>
+            <a class="dropdown-item" href="{% url 'order' %}">Vsetko</a>
+          </div>
+          {% for category in categories %}
+          <div class="categories">
+              <a class="dropdown-item" href="{% url 'order' %}?q={{category.name}}">{{category.name}}</a>
+          </div>
+          {% endfor %}
+      </ul>
+        <div class="container mb-1">
+            <div class="row justify-content-center mt-1">
+                <div class="col-md-12 col-sm-12 p-2">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="pt-1">
+                            <div class="pt-1">
+                                {% if category %}
+                                <h5>{{ category.name }}</h5>
+                                {% endif %}
+                                {% for item in items %}
+                                <div class="row mt-4">
+                                    <div class="col-md-2 col-sm-12">
+                                        <img class="rounded" src="{{ item.image.url }}" width="150" height="100"/>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                        <div class="d-flex flex-row">
+                                            <div class="form-group form-check col-md-8 col-sm-12 p-4">
+                                                <input type="checkbox" name="items[]" class="form-check-input" value="{{ item.pk }}">
+                                                <label class="form-check-label">{{ item.name }}</label>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 p-2">
+                                                <input class="form-input" id="quantity{{ item.id }}" type="integer" placeholder="0" name="quantity" />
+                                            </div>
+                                            <p class="font-weight-bold pl-5">{{ item.price }}</p>
+                                            <div class="col-md-5 col-sm-12 p-4">
+                                                <a href="{% url 'item-desctiption' item.pk %}" class="btn bt-light">Detaily!</a>
+                                            </div>
+                                        </div>
+                                        <label class="form-check-label">{{ item.name }}</label>
+                                    </div>
                                 </div>
-                                <p class="font-weight-bold pl-5">{{ app.price }}</p>
-                                <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity"/>
-                                <div class="col-md-5 col-sm-12 p-4">
-                                    <a href="{% url 'item-desctiption' app.pk %}" class="btn bt-light">Informacie</a>
-                                </div>
+                                <hr />
+                                {% endfor %}
+                                <button class="btn btn-dark mt-5">Potvrdit Produkty!!</button>
+                                <br>
                             </div>
-                        </div>
-                        <div>
-                            <label class="form-check-label">{{ app.name }}</label>
-                            <div class="col-md-5 col-sm-12">
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                {% endfor %}
+                            <br>
+                         </div>
+                        <br>
+                    </form>
+                    <br>
                 </div>
-
-                <div class="pt-5">
-                    <h5>Categoria 2!</h5>
-                    {% for entre in entres %}
-                    <div class="row mt-4">
-                        <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ entre.image.url }}" width="150" height="100"/>
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="d-flex flex-row">
-                                <div class="form-group form-check col-md-8 col-sm-12 p-4">
-                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ entre.pk }}">
-                                    <label class="form-check-label">{{ entre.name }}</label>
-                                </div>
-                                <div class="col-md-3 col-sm-12 p-2">
-                                    <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity" />
-                                </div>
-                                <p class="font-weight-bold pl-5">{{ entre.price }}</p>
-                                <div class="col-md-5 col-sm-12 p-4">
-                                    <a href="{% url 'item-desctiption' entre.pk %}" class="btn bt-light">Detail!</a>
-                                </div>
-                            </div>
-                            <label class="form-check-label">{{ app.name }}</label>
-                        </div>
-                    </div>
-                    <hr />
-                    {% endfor %}
-                </div>
-
-                <div class="pt-5">
-                    <h5>Categoria 3!</h5>
-                    {% for dessert in desserts %}
-                    <div class="row mt-4">
-                        <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ dessert.image.url }}" width="150" height="100"/>
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="d-flex flex-row">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ dessert.pk }}">
-                                    <label class="form-check-label">{{ dessert.name }}</label>
-                                </div>
-                                <p class="font-weight-bold pl-5">{{ dessert.price }}</p>
-                            </div>
-                            <p>{{ dessert.description }}</p>
-                            <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity" />
-                            <label class="form-check-label">{{ app.name }}</label>
-                        </div>
-                    </div>
-                    <hr />
-                    {% endfor %}
-                </div>
-
-                <div class="pt-5">
-                    <h5>Categoria 4!</h5>
-                    {% for soup in soups %}
-                    <div class="row mt-4">
-                        <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ soup.image.url }}" width="150" height="100"/>
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="d-flex flex-row">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ soup.pk }}">
-                                    <label class="form-check-label">{{ soup.name }}</label>
-                                </div>
-                                <p class="font-weight-bold pl-5">{{ soup.price }}</p>
-                            </div>
-                            <p>{{ soup.description }}</p>
-                            <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity" />                                    <label class="form-check-label">{{ app.name }}</label>
-
-                        </div>
-                    </div>
-                    <hr />
-                    {% endfor %}
-                </div>
-
-                <div class="pt-5">
-                    <h5>Categoria 5!</h5>
-                    {% for drink in drinks %}
-                    <div class="row mt-4">
-                        <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ drink.image.url }}" width="150" height="100"/>
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="d-flex flex-row">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ drink.pk }}">
-                                    <label class="form-check-label">{{ drink.name }}</label>
-                                    <input class="form-control" type="integer" placeholder="Pocet Kusov" name="quantity" />
-                                    <label class="form-check-label">{{ app.name }}</label>
-                                </div>
-                            </div>
-                            <p>{{ drink.description }}</p>
-                            <p class="font-weight-bold pl-5">{{ drink.price }}</p>
-                        </div>
-                    </div>
-                    <hr />
-                    {% endfor %}
-                </div>
-
-                <div class="form-group pt-3">
-                    <label for="name">Cele Meno</label>
-                    <input required class="form-control" type="text" placeholder="Vase meno" name="name" />
-                </div>
-
-                <div class="form-group pt-3">
-                    <label for="name">Emailova adresa</label>
-                    <input required class="form-control" type="text" placeholder="nazornypriklad@priklad.com" name="email" />
-                </div>
-
-                <div class="form-group pt-3">
-                    <label for="name">Adresa</label>
-                    <input required class="form-control" type="text" placeholder="Tkacska 1/9" name="street" />
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-12">
-                        <div class="form-group pt-3">
-                            <label for="name">Mesto</label>
-                            <input required class="form-control" type="text" placeholder="Spisska Nova Ves" name="city" />
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <div class="form-group pt-3">
-                            <label for="name">Stat</label>
-                            <input required class="form-control" type="text" placeholder="Slovensko" name="state" />
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <div class="form-group pt-3">
-                            <label for="name">PSC</label>
-                            <input required class="form-control" type="text" placeholder="05201" name="zipcode" />
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-dark mt-5">Objednat!!</button>
-            </form>
+                <br>
+            </div>
+            <br>
         </div>
-    </div>
 </div>
 {% endblock content %}

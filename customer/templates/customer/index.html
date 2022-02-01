@@ -17,7 +17,7 @@
         <div class="row mt-5">
             {% for new_item in new_items %}
             <div class="card position-relative" style="width: 17rem; margin: 10px">
-                <img class="rounded" src="{{ new_item.image.url }}" width="274" height="225"/>
+                <img class="rounded" src="{{ new_item.image.url }}" width="272" height="222"/>
                 <div class="card-body">
                 <h5 class="card-title">{{ new_item.name }}</h5>
                 <p class="card-text">{{ new_item.description }}</p>
@@ -27,10 +27,24 @@
             {% endfor %}
         </div>
     </div>
-    <div class="container mb-5">
-        <div class="row justify-content-center mt-5">
-            {% for order in most_ordered %}
-                <img class="rounded" src="{{ app.image.url }}" width="150" height="100"/>
+
+    <div class="row mt-5">
+        <div class="col-md-8 col-sm-12 p-4">
+            <h3>Novinky O nas!</h3>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="row mt-5">
+            {% for new in news %}
+            <div class="card position-relative" style="width: 17rem; margin: 10px">
+                <img class="rounded" src="{{ new.image.url }}" width="274" height="225"/>
+                <div class="card-body">
+                <h5 class="card-title">{{ new.topic }}</h5>
+                <p class="card-text">{{ new.body }}</p>
+                <a href="#" class="btn btn-pink">Informacie</a>
+              </div>
+            </div>
             {% endfor %}
         </div>
     </div>

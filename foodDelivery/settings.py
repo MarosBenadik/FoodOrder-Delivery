@@ -39,6 +39,8 @@ INSTALLED_APPS = [
 	'customer',
 	'restourant',
 
+	'rest_framework',
+
 	'crispy_forms',
 	'allauth',
 	'allauth.account',
@@ -143,6 +145,14 @@ ACCOUNT_ADAPTER = 'restourant.account_adapter.NoNewUserAccountAdapter'
 LOGIN_REDIRECT_URL = 'dashboard'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+
+    ]
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
